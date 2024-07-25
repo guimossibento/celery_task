@@ -9,7 +9,7 @@ def trigger_tasks():
         print(f"Task ID: {result.id}")
 
         # Wait for the result and print the total number of primes
-        total_primes = result.get(timeout=3600)  # Wait up to 1 hour for the result
+        total_primes = result.get(timeout=20)  # Wait up to 1 hour for the result
         print(f"Total number of primes found: {total_primes}")
 
 
