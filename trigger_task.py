@@ -2,7 +2,7 @@ from tasks import cpu_intensive_task
 
 
 def trigger_tasks():
-    limit = 10 ** 6  # Set the limit for prime number calculation
+    limit = 10 ** 4  # Set the limit for prime number calculation
     num_tasks = 1  # Number of tasks to trigger
     for _ in range(num_tasks):
         result = cpu_intensive_task.delay(limit)
