@@ -10,7 +10,7 @@ services:
     image: localhost:5000/celery_worker:latest
     deploy:
       mode: replicated
-      replicas: 10
+      replicas: 1
     networks:
       - backend
 
