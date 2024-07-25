@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:6.2
+    networks:
+      - backend
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 3
+    networks:
+      - backend
+
+  trigger:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["python", "trigger_task.py"]
+    depends_on:
+      - redis
+      - worker
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+
+networks:
+  backend:
