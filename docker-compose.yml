@@ -11,7 +11,11 @@ services:
       context: .
       dockerfile: Dockerfile
     deploy:
-      replicas: 3
+      mode: replicated
+      replicas: 10
+      resources:
+        limits:
+          cpus: '1.0'
     networks:
       - backend
 
@@ -26,6 +30,7 @@ services:
     networks:
       - backend
     deploy:
+      mode: replicated
       replicas: 1
       restart_policy:
         condition: none
