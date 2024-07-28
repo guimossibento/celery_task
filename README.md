@@ -22,5 +22,5 @@ docker stack deploy -c docker-compose.yml celery_stack
 docker ps
 docker exec -it afd4e37edab4 python3 /app/trigger_task_integrity_save_each_time.py
 docker exec -it 9dfcaefd5f27 python3 /app/trigger_task_integrity_save_lot.py
-docker exec -it 00b19e5dc4eb python3 /app/trigger_task_integrity_save_lot_chuck.py
+docker exec -it acd0012db480 python3 /app/trigger_task_integrity_save_lot_chuck.py
 ````
