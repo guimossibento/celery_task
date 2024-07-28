@@ -5,6 +5,7 @@ RUN pip install celery redis billiard
 
 WORKDIR /app
 COPY tasks.py /app/
-COPY trigger_task.py /app/
+COPY trigger_task_integrity_save_each_time.py /app/
+COPY trigger_task_integrity_save_lot.py /app/
 
 CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
