@@ -3,20 +3,19 @@ version: '3.8'
 services:
   redis:
     image: redis:6.2
-    network_mode: host
-#    networks:
-#      - backend
+    networks:
+      - celery_task
 
   worker:
-    image: localhost:5000/celery_worker:latest
+    image: registry.gitlab.com/mtvp/celery_task:latest
     deploy:
       mode: replicated
       replicas: 1
     env_file:
       - .env
-    network_mode: host
-#    networks:
-#      - backend
+    networks:
+      - celery_task
 
-#networks:
-#  backend:
+networks:
+  celery_task:
+    external: true
