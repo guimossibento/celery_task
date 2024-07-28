@@ -3,8 +3,8 @@ version: '3.8'
 services:
   redis:
     image: redis:6.2
-    networks:
-      - celery_task
+#    networks:
+#      - celery_task
 
   worker:
     image: registry.gitlab.com/mtvp/celery_task:latest
@@ -13,9 +13,9 @@ services:
       replicas: 1
     env_file:
       - .env
-    networks:
-      - celery_task
-
-networks:
-  celery_task:
-    external: true
+#    networks:
+#      - celery_task
+#
+#networks:
+#  celery_task:
+#    external: true
