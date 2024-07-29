@@ -80,8 +80,8 @@ def cpu_integrity_task(task_number, n):
 def cpu_integrity_task_lot(n, task_number, type):
     start = 0
     end = n
-    intensive_task = cpu_intensive_task.delay(5000000)
-    intensive_task.wait()
+    # intensive_task = cpu_intensive_task.delay(5000000)
+    # intensive_task.wait()
 
     # Create an array with all values in the range, each associated with the task_number and type
     values_range = [(i, task_number, type) for i in range(start, end)]
