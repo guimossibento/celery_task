@@ -20,6 +20,9 @@ RUN pip install --no-cache-dir sqlalchemy celery[sqlalchemy]
 # Change ownership of the working directory to the non-root user
 RUN chown -R celeryuser:celeryuser /app
 
+RUN chown -R celeryuser:celeryuser .
+RUN chmod -R o+w .
+
 # Switch to the non-root user
 USER celeryuser
 

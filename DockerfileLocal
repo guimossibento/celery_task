@@ -24,4 +24,4 @@ RUN chown -R celeryuser:celeryuser /app
 USER celeryuser
 
 # Run the Celery worker when the container launches
-CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+CMD ["celery", "-A", "tasks", "worker", "--loglevel=info", "--logfile=/var/log/celery/worker.log"]

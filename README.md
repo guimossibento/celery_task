@@ -16,15 +16,22 @@ git pull origin master
  
 docker stack rm celery_stack
  
-docker build -t localhost:5000/celery_worker:latest .
-docker push localhost:5000/celery_worker:latest
+docker build -t registry.gitlab.com/mtvp/celery_task .
+docker push registry.gitlab.com/mtvp/celery_task
 
 docker stack deploy -c docker-compose.yml celery_stack
-
+docker service scale celery_stack_worker=2
+ 
 docker ps
-docker exec -it afd4e37edab4 python3 /app/trigger_task_integrity_save_each_time.py
-docker exec -it e34b2407bd74 python3 /app/trigger_task_integrity_save_lot.py
-docker exec -it bd11e0ea5898 python3 /app/trigger_task_integrity_save_lot_chuck.py
+docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_each_time.py
+docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_lot.py
+docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_lot_chuck.py
 
 docker network create -d bridge celery_task  
+
+
+
+ 
+docker build -t localhost:5000/celery_worker:latest .
+docker push localhost:5000/celery_worker:latest   
 ````
