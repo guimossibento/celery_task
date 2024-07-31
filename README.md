@@ -14,18 +14,19 @@ cur.execute('''
 
 git pull origin master
  
-docker stack rm celery_stack
  
 docker build -t registry.gitlab.com/mtvp/celery_task .
 docker push registry.gitlab.com/mtvp/celery_task
-
+ 
+docker stack rm celery_stack
+docker pull registry.gitlab.com/mtvp/celery_task
 docker stack deploy -c docker-compose.yml celery_stack
 docker service scale celery_stack_worker=2
  
 docker ps
-docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_each_time.py
-docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_lot.py
-docker exec -it 4fbebd4a99c4 python3 /app/trigger_task_integrity_save_lot_chuck.py
+docker exec -it d7c2ba8f6783 python3 /app/trigger_task_integrity_save_each_time.py
+docker exec -it af604a0438ee python3 /app/trigger_task_integrity_save_lot.py
+docker exec -it af604a0438ee python3 /app/trigger_task_integrity_save_lot_chuck.py
 
 docker network create -d bridge celery_task  
 

@@ -23,5 +23,8 @@ RUN chown -R celeryuser:celeryuser /app
 # Switch to the non-root user
 USER celeryuser
 
+# Verify the Celery executable path
+RUN which celery
+
 # Run the Celery worker when the container launches
-CMD ["celery", "-A", "tasks", "worker", "--loglevel=info", "--logfile=/var/log/celery/worker.log"]
+CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
