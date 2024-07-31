@@ -23,9 +23,9 @@ docker stack deploy -c docker-compose.yml celery_stack
 docker service scale celery_stack_worker=2
  
 docker ps
-docker exec -it 8047f41a348a python3 /app/trigger_task_integrity_save_each_time.py
-docker exec -it 02c477f756b8 python3 /app/trigger_task_integrity_save_lot.py
-docker exec -it 02c477f756b8 python3 /app/trigger_task_integrity_save_lot_chunk.py
+docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_each_time.py
+docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_lot.py
+docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_lot_chunk.py
 
 docker network create -d bridge celery_task  
 
