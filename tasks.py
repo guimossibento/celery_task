@@ -8,12 +8,12 @@ import socket
 from dotenv import load_dotenv
 import traceback
 
-load_dotenv()
 
 load_dotenv()
 app = Celery('tasks',
-             broker='redis://redis:6379/0',
+             broker=f"redis://:{os.environ['REDIS_PASS']}@{os.environ['DATABASE_HOST']}:6379/0",
              backend=f"db+postgresql://{os.environ['DATABASE_USER']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_HOST']}:{os.environ['DATABASE_PORT']}/{os.environ['DATABASE_NAME']}")
+
 
 app.config_from_object('celeryconfig')
 
