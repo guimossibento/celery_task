@@ -23,7 +23,7 @@ docker stack deploy -c docker-compose.yml celery_stack
 docker service scale celery_stack_worker=2
  
 docker ps
-docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_each_time.py
+docker exec -it d4ca37349339 python3 /app/trigger_task_integrity_save_each_time.py
 docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_lot.py
 docker exec -it 805a54896bdc python3 /app/trigger_task_integrity_save_lot_chunk.py
 
