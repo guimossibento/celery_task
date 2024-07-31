@@ -55,25 +55,18 @@ if __name__ == "__main__":
     print(f"Starting task execution: num_tasks={num_tasks}, task_size={task_size}, task_type={task_type}")
     host_ip = get_host_ip()
 
-    all_results = []
     for i in range(num_tasks):
         print(f"Triggering Celery task {i} with size {task_size} and type {task_type}")
         task_result = cpu_integrity_task_lot.delay(task_size, i, task_type)
-        all_results.append(task_result)
 
-    # Wait for all tasks to complete and collect results
-    collected_results = []
-    for i, task_result in enumerate(all_results):
         try:
             print(f"Waiting for result of task {i}")
             task_results = task_result.wait()  # Adjust timeout as needed
-            collected_results.extend(task_results)
             print(f"Task {i} completed with results: {task_results}")
+            # Save the results to PostgreSQL
+            save_to_postgresql(task_results, host_ip)
         except Exception as e:
             print(f"Error waiting for result of task {i}: {e}")
             print(traceback.format_exc())
 
-    # Save the results to PostgreSQL
-    print("Saving results to PostgreSQL...")
-    save_to_postgresql(collected_results, host_ip)
-    print("Finished saving results to PostgreSQL.")
+    print("Finished executing all tasks.")
